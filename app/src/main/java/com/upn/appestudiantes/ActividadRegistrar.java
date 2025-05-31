@@ -20,7 +20,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.upn.appestudiantes.Access.DAOEstudiante;
+import com.upn.appestudiantes.Access.DAOEstudianteBD;
 import com.upn.appestudiantes.Model.Estudiante;
+import com.upn.appestudiantes.Model.EstudianteDB;
 
 public class ActividadRegistrar extends AppCompatActivity {
 
@@ -100,7 +102,7 @@ public class ActividadRegistrar extends AppCompatActivity {
 
         boolean ninguno = cbxNinguno.isChecked();
         boolean carreraTec= cbxCarreTe.isChecked();
-
+/*
         //Crear modelo antes de crear el objeto y a la par DAO
         Estudiante oE = new Estudiante(txtNombre,tipoCarrera,sexo,ninguno,carreraTec);
 
@@ -108,6 +110,18 @@ public class ActividadRegistrar extends AppCompatActivity {
         DAOEstudiante.getInstacia().insertarEstudiante(oE);
         Toast.makeText(this,"Registro Aceptado",Toast.LENGTH_LONG).show();
         CuadroDialogo();
+ */
+
+        EstudianteDB oE = new EstudianteDB(txtNombre,tipoCarrera,
+                sexo,ninguno,carreraTec);
+        DAOEstudianteBD oBDEmergencia = new DAOEstudianteBD(this);
+        String rpta = oBDEmergencia.addEstudianteBD(oE);
+        if(rpta=="OK")
+            Toast.makeText(this,"Registro aceptado",Toast.LENGTH_LONG).show();
+        else
+            Toast.makeText(this,rpta,Toast.LENGTH_LONG).show();
+        CuadroDialogo();
+
     }
 
     private void CuadroDialogo() {
